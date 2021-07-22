@@ -21,7 +21,7 @@ class PlayersForm extends Component {
     };
     randomPlayers = (e) => {
         e.preventDefault();
-        const listOfPlayers = this.state.players;
+        const listOfPlayers = [...this.state.players];
         console.log(listOfPlayers);
         const teams = listOfPlayers.sort(() => Math.random() - 0.5);
         console.log(teams);
