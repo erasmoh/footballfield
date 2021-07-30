@@ -29,11 +29,13 @@ class PlayersForm extends Component {
         e.preventDefault();
         const listOfPlayers = [...this.state.players];
         const nOfPlayers = this.state.nOfPlayers;
+
+        const teams = [];
         // console.log(listOfPlayers);
-        const teams = [...listOfPlayers].sort(() => Math.random() - 0.5);
+        const randomTeams = [...listOfPlayers].sort(() => Math.random() - 0.5);
         // console.log(teams);
-        while (teams.length >= nOfPlayers) {
-            const newTeam = teams.splice(0, nOfPlayers);
+        while (randomTeams.length >= nOfPlayers) {
+            const newTeam = randomTeams.splice(0, nOfPlayers);
             teams.push(newTeam);
         }
         this.setState({ teams });
