@@ -32,13 +32,13 @@ class PlayersForm extends Component {
         // console.log(listOfPlayers);
         const teams = [...listOfPlayers].sort(() => Math.random() - 0.5);
         // console.log(teams);
-        this.setState({ teams });
-
         while (teams.length >= nOfPlayers) {
             const newTeam = teams.splice(0, nOfPlayers);
             teams.push(newTeam);
         }
-        console.log({ listOfPlayers, teams });
+        this.setState({ teams });
+        // console.log("teams:", teams);
+        // console.log({ listOfPlayers, teams });
     };
     render() {
         return (
@@ -80,9 +80,7 @@ class PlayersForm extends Component {
                         Sortear
                     </button>
                 </div>
-                {this.state.teams.map((team, index) => {
-                    return <TeamList teams={team} key={index} />;
-                })}
+                <TeamList teams={this.state.teams} />
             </div>
         );
     }
