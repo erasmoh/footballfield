@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import PlayersList from "./PlayersList";
+import TeamList from "./TeamList";
 
 class PlayersForm extends Component {
     state = {
         players: [],
         newPlayer: "",
         teams: [],
+        nOfPlayers: 1,
     };
     handleChange = (e) => {
         this.setState({
             newPlayer: e.target.value,
         });
     };
-
+    handlePlayers = (e) => {
+        this.setState({
+            nOfPlayers: e.target.value,
+        });
+    };
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState({
@@ -22,10 +28,17 @@ class PlayersForm extends Component {
     randomPlayers = (e) => {
         e.preventDefault();
         const listOfPlayers = [...this.state.players];
-        console.log(listOfPlayers);
-        const teams = listOfPlayers.sort(() => Math.random() - 0.5);
-        console.log(teams);
+        const nOfPlayers = this.state.nOfPlayers;
+        // console.log(listOfPlayers);
+        const teams = [...listOfPlayers].sort(() => Math.random() - 0.5);
+        // console.log(teams);
         this.setState({ teams });
+
+        while (teams.length >= nOfPlayers) {
+            const newTeam = teams.splice(0, nOfPlayers);
+            teams.push(newTeam);
+        }
+        console.log({ listOfPlayers, teams });
     };
     render() {
         return (
@@ -34,7 +47,16 @@ class PlayersForm extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
                             <div className="form-group col-md-12">
-                                <label for="inputEmail4">Player Name</label>
+                                <label htmlFor="nOfPlayers">
+                                    Number of Players
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={this.state.nOfPlayers}
+                                    onChange={this.handlePlayers}
+                                />
+                                <label htmlFor="playerName">Player Name</label>
                                 <input
                                     onChange={this.handleChange}
                                     type="text"
@@ -58,9 +80,9 @@ class PlayersForm extends Component {
                         Sortear
                     </button>
                 </div>
-                <div className="col-6">
-                    <PlayersList players={this.state.teams} />
-                </div>
+                {this.state.teams.map((team, index) => {
+                    return <TeamList teams={team} key={index} />;
+                })}
             </div>
         );
     }
