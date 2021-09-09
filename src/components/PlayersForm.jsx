@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PlayersList from "./PlayersList";
 import TeamList from "./TeamList";
+import Footer from "./Footer";
 
 class PlayersForm extends Component {
     state = {
@@ -31,16 +32,12 @@ class PlayersForm extends Component {
         const nOfPlayers = this.state.nOfPlayers;
 
         const teams = [];
-        // console.log(listOfPlayers);
         const randomTeams = [...listOfPlayers].sort(() => Math.random() - 0.5);
-        // console.log(teams);
         while (randomTeams.length >= nOfPlayers) {
             const newTeam = randomTeams.splice(0, nOfPlayers);
             teams.push(newTeam);
         }
         this.setState({ teams });
-        // console.log("teams:", teams);
-        // console.log({ listOfPlayers, teams });
     };
     render() {
         return (
@@ -83,6 +80,7 @@ class PlayersForm extends Component {
                     </button>
                 </div>
                 <TeamList teams={this.state.teams} />
+                <Footer />
             </div>
         );
     }
