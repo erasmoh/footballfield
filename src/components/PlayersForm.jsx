@@ -37,7 +37,14 @@ function PlayersForm() {
         setTeams([]);
         setNewPlayer("");
         setNop(1);
-    }
+    };
+    const handleDelete = (player) => {
+        const temp = [...players];
+
+        temp.splice(player, 1);
+
+        setPlayers(temp);
+    };
 
     return (
         <div className="row">
@@ -76,7 +83,10 @@ function PlayersForm() {
                 </form>
                 {players.length > 0 && (
                     <React.Fragment>
-                        <PlayersList players={players} />
+                        <PlayersList
+                            players={players}
+                            onDelete={handleDelete}
+                        />
                         <button
                             disabled={players.length === 0}
                             onClick={randomPlayers}
@@ -84,7 +94,12 @@ function PlayersForm() {
                         >
                             Sortear
                         </button>
-                        <button onClick={resetPlayers} className="btn btn-warning">Reset</button>
+                        <button
+                            onClick={resetPlayers}
+                            className="btn btn-warning"
+                        >
+                            Reset
+                        </button>
                     </React.Fragment>
                 )}
             </div>

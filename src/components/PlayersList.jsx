@@ -1,7 +1,6 @@
 import React from "react";
 
-function PlayersList(props) {
-    const players = props.players || [];
+function PlayersList({ players, onDelete }) {
 
     return (
         <div className="col-12">
@@ -10,6 +9,7 @@ function PlayersList(props) {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,6 +18,14 @@ function PlayersList(props) {
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
                                 <td>{player}</td>
+                                <td>
+                                    <button
+                                        className="btn btn-danger btn-sm"
+                                        onClick={(e) => onDelete(index)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         );
                     })}
