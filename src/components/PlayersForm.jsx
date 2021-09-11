@@ -19,6 +19,8 @@ function PlayersForm() {
         setPlayers((prev) => {
             return [...prev, newPlayer];
         });
+        // clears new player field
+        setNewPlayer('');
     };
     const randomPlayers = (e) => {
         e.preventDefault();
@@ -40,9 +42,7 @@ function PlayersForm() {
     };
     const handleDelete = (player) => {
         const temp = [...players];
-
         temp.splice(player, 1);
-
         setPlayers(temp);
     };
 
@@ -103,7 +103,11 @@ function PlayersForm() {
                     </React.Fragment>
                 )}
             </div>
-            <TeamList teams={teams} />
+            {
+                teams.length > 0 ? 
+                <TeamList teams={teams} />
+                : 'No teams yet'
+            }
         </div>
     );
 }
