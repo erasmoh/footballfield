@@ -1,89 +1,85 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PlayersList from "./PlayersList";
 import TeamList from "./TeamList";
-import Footer from "./Footer";
 
-class PlayersForm extends Component {
-    state = {
-        players: [],
-        newPlayer: "",
-        teams: [],
-        nOfPlayers: 1,
-    };
-    handleChange = (e) => {
-        this.setState({
-            newPlayer: e.target.value,
-        });
-    };
-    handlePlayers = (e) => {
-        this.setState({
-            nOfPlayers: e.target.value,
-        });
-    };
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.setState({
-            players: [this.state.newPlayer, ...this.state.players],
-        });
-    };
-    randomPlayers = (e) => {
-        e.preventDefault();
-        const listOfPlayers = [...this.state.players];
-        const nOfPlayers = this.state.nOfPlayers;
+function PlayersForm() {
+    const [players, setPlayers] = useState([]);
+    const [newPlayer, setNewPlayer] = useState("");
+    const [teams, setTeams] = useState([]);
+    const [nop, setNop] = useState(1);
 
-        const teams = [];
+    const handleChange = ({ target }) => {
+        setNewPlayer(target.value);
+    };
+    const handlePlayers = ({ target }) => {
+        setNop(target.value);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setPlayers((prev) => {
+            return [...prev, newPlayer];
+        });
+    };
+    const randomPlayers = (e) => {
+        e.preventDefault();
+        const listOfPlayers = [...players];
+        const virtualTeams = [];
+
         const randomTeams = [...listOfPlayers].sort(() => Math.random() - 0.5);
-        while (randomTeams.length >= nOfPlayers) {
-            const newTeam = randomTeams.splice(0, nOfPlayers);
-            teams.push(newTeam);
+        while (randomTeams.length >= nop) {
+            const newTeam = randomTeams.splice(0, nop);
+            virtualTeams.push(newTeam);
         }
-        this.setState({ teams });
+        setTeams((teams) => virtualTeams);
     };
-    render() {
-        return (
-            <div className="row">
-                <div className="col-6">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="form-row">
-                            <div className="form-group col-md-12">
-                                <label htmlFor="nOfPlayers">
-                                    Number of Players
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={this.state.nOfPlayers}
-                                    onChange={this.handlePlayers}
-                                />
-                                <label htmlFor="playerName">Player Name</label>
-                                <input
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    className="form-control"
-                                    id="player"
-                                    placeholder="Player Name"
-                                    name="newPlayer"
-                                    value={this.state.newPlayer}
-                                />
-                            </div>
-                            <button type="submit" className="btn btn-primary">
-                                Add Player
-                            </button>
+
+    return (
+        <div className="row">
+            <div className="col-6">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <label htmlFor="nOfPlayers">
+                                Number of Players
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={nop}
+                                onChange={handlePlayers}
+                            />
+                            <label htmlFor="playerName">Player Name</label>
+                            <input
+                                onChange={handleChange}
+                                type="text"
+                                className="form-control"
+                                id="player"
+                                placeholder="Player Name"
+                                name="newPlayer"
+                                value={newPlayer}
+                            />
                         </div>
-                    </form>
-                    <PlayersList players={this.state.players} />
-                    <button
-                        onClick={this.randomPlayers}
-                        className="btn btn-primary"
-                    >
-                        Sortear
-                    </button>
-                </div>
-                <TeamList teams={this.state.teams} />
-                <Footer />
+                        <button
+                            disabled={newPlayer === ""}
+                            type="submit"
+                            className="btn btn-primary"
+                        >
+                            Add Player
+                        </button>
+                    </div>
+                </form>
+                <PlayersList players={players} />
+                <button
+                    disabled={players.length === 0}
+                    onClick={randomPlayers}
+                    className="btn btn-primary"
+                >
+                    Sortear
+                </button>
             </div>
-        );
-    }
+            <TeamList teams={teams} />
+        </div>
+    );
 }
 
 export default PlayersForm;

@@ -2,7 +2,6 @@ import React from "react";
 
 function TeamList(props) {
     const teams = props.teams || [];
-    // console.log(teams);
     return (
         <div className="col-6">
             {teams.map((team, index) => {
