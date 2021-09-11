@@ -20,7 +20,7 @@ function PlayersForm() {
             return [...prev, newPlayer];
         });
         // clears new player field
-        setNewPlayer('');
+        setNewPlayer("");
     };
     const randomPlayers = (e) => {
         e.preventDefault();
@@ -75,13 +75,15 @@ function PlayersForm() {
                         <button
                             disabled={newPlayer === ""}
                             type="submit"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm my-2"
                         >
                             Add Player
                         </button>
                     </div>
                 </form>
-                {players.length > 0 && (
+            </div>
+            <div className="col-6">
+                {players.length > 0 ? (
                     <React.Fragment>
                         <PlayersList
                             players={players}
@@ -90,24 +92,20 @@ function PlayersForm() {
                         <button
                             disabled={players.length === 0}
                             onClick={randomPlayers}
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm mx-2"
                         >
-                            Sortear
+                            Create teams
                         </button>
                         <button
                             onClick={resetPlayers}
-                            className="btn btn-warning"
+                            className="btn btn-warning btn-sm"
                         >
                             Reset
                         </button>
                     </React.Fragment>
-                )}
+                ) : 'Add some players'}
             </div>
-            {
-                teams.length > 0 ? 
-                <TeamList teams={teams} />
-                : 'No teams yet'
-            }
+            {teams.length > 0 ? <TeamList teams={teams} /> : "No teams yet"}
         </div>
     );
 }
