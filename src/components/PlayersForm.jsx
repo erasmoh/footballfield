@@ -32,6 +32,12 @@ function PlayersForm() {
         }
         setTeams((teams) => virtualTeams);
     };
+    const resetPlayers = (e) => {
+        setPlayers([]);
+        setTeams([]);
+        setNewPlayer("");
+        setNop(1);
+    }
 
     return (
         <div className="row">
@@ -68,14 +74,19 @@ function PlayersForm() {
                         </button>
                     </div>
                 </form>
-                <PlayersList players={players} />
-                <button
-                    disabled={players.length === 0}
-                    onClick={randomPlayers}
-                    className="btn btn-primary"
-                >
-                    Sortear
-                </button>
+                {players.length > 0 && (
+                    <React.Fragment>
+                        <PlayersList players={players} />
+                        <button
+                            disabled={players.length === 0}
+                            onClick={randomPlayers}
+                            className="btn btn-primary"
+                        >
+                            Sortear
+                        </button>
+                        <button onClick={resetPlayers} className="btn btn-warning">Reset</button>
+                    </React.Fragment>
+                )}
             </div>
             <TeamList teams={teams} />
         </div>
