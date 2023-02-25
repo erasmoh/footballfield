@@ -31,8 +31,6 @@ function PlayersForm() {
     const finalList = newList.concat(players, playerValues);
     setPlayers(finalList);
 
-    console.log(playerValues);
-    console.log("players", players);
     // clears new player field
     !multiline && setNewPlayer("");
   };
