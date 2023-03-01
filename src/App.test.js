@@ -3,9 +3,9 @@ import App from './App';
 
 // Add tests
 
-test('renders learn react link', () => {
+test('Render app div', () => {
   render(<App />);
-  // const linkElement = screen.getByText(/learn react/i);
-  const element = document.querySelector('.App');
+  // const element = document.querySelector('.App');
+  const element = screen.getByTestId('app');
   expect(element).toBeInTheDocument();
 });
