@@ -5,10 +5,28 @@ import TeamList from './TeamList';
 
 // Mock
 
-const teams = []
+const teams = [["first player", "second player"], ["first player", "second player"]]
 
 test('Render teamList component', () => {
     render(<TeamList teams={teams} />);
-    const element = screen.getByTestId('teamList');
-    expect(element).toBeInTheDocument();
+    const element = screen.getAllByTestId('teamList');
+    expect(element.length).toBe(2);
+});
+
+test('Render only one teamList component', () => {
+    render(<TeamList teams={[["first player", "second player"]]} />);
+    const element = screen.queryByTestId('teamList');
+    expect(element).toBeNull();
+});
+
+test('Render three teamList components', () => {
+    render(<TeamList teams={[["first player", "second player"], ["first player", "second player"], ["first player", "second player"]]} />);
+    const element = screen.getAllByTestId('teamList');
+    expect(element.length).toBe(3);
+});
+
+test('Render more than three teamList components', () => {
+    render(<TeamList teams={[["first player", "second player"], ["first player", "second player"], ["first player", "second player"], ["first player", "second player"]]} />);
+    const element = screen.getAllByTestId('teamList');
+    expect(element.length).toBe(4);
 });

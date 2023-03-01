@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PlayersList from "../PlayersList/PlayersList";
 import TeamList from "../TeamList/TeamList";
 
@@ -57,6 +57,10 @@ function PlayersForm() {
     temp.splice(player, 1);
     setPlayers(temp);
   };
+
+  useEffect(() => {
+    console.log("teams", teams);
+  }, [teams]);
 
   return (
     <div className="row" data-testid="playersForm">

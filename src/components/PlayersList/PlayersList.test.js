@@ -4,7 +4,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import PlayersList from './PlayersList';
 
 // Mock
-
 const players = ["first", "second", "third", "fourth"]
 
 test('Render teamList component', () => {
