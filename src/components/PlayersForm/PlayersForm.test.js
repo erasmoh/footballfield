@@ -29,3 +29,23 @@ test('should change number of players', () => {
     fireEvent.change(nopInput, { target: { value: 3 } })
     expect(nopInput.value).toBe("3")
 })
+
+test('should change single new player name', () => {
+    const { getByTestId } = render(<PlayersForm />)
+    const newPlayerInput = getByTestId('playerInput')
+
+    fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
+    expect(newPlayerInput.value).toBe("John Doe")
+})
+
+test('should change multiple new player name', () => {
+    const { getByTestId } = render(<PlayersForm />);
+    const multiLineRadio = getByTestId('multiLineRadio')
+    
+    fireEvent.click(multiLineRadio)
+    // Players Textarea is only available after changing the multiline
+    const newPlayerTextArea = getByTestId('playersTextArea')
+
+    fireEvent.change(newPlayerTextArea, { target: { value: "John Doe" } })
+    expect(newPlayerTextArea.value).toBe("John Doe")
+})
