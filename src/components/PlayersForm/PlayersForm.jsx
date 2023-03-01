@@ -94,6 +94,7 @@ function PlayersForm() {
                     className="form-control"
                     value={nop}
                     onChange={handlePlayers}
+                    data-testid="playersNumberInput"
                   />
                 </div>
               </div>
@@ -105,7 +106,7 @@ function PlayersForm() {
                     value={multilist}
                     onChange={handleMultilistChange}
                     rows={nop}
-                    data-testid="playersInput"
+                    data-testid="playersTextArea"
                   ></textarea>
                 </>
               ) : (

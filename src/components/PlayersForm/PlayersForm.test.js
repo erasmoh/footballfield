@@ -21,3 +21,11 @@ test('should change between single and multiline', () => {
     expect(singleLineRadio.checked).toBeFalsy();
     expect(multiLineRadio.checked).toBeTruthy();
 })
+
+test('should change number of players', () => {
+    const { getByTestId } = render(<PlayersForm />)
+    const nopInput = getByTestId('playersNumberInput')
+
+    fireEvent.change(nopInput, { target: { value: 3 } })
+    expect(nopInput.value).toBe("3")
+})
