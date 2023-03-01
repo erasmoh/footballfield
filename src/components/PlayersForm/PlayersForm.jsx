@@ -73,6 +73,7 @@ function PlayersForm() {
                     value="single"
                     onChange={handleMultiline}
                     checked={!multiline}
+                    data-testid="singleLineRadio"
                   />
                   <label htmlFor="single">Single add</label>
                   <input
@@ -82,6 +83,7 @@ function PlayersForm() {
                     value="multi"
                     onChange={handleMultiline}
                     checked={multiline}
+                    data-testid="multiLineRadio"
                   />
                   <label htmlFor="multi">Bulk add</label>
                 </div>
@@ -103,6 +105,7 @@ function PlayersForm() {
                     value={multilist}
                     onChange={handleMultilistChange}
                     rows={nop}
+                    data-testid="playersInput"
                   ></textarea>
                 </>
               ) : (
@@ -116,6 +119,7 @@ function PlayersForm() {
                     placeholder="Player Name"
                     name="newPlayer"
                     value={newPlayer}
+                    data-testid="playerInput"
                   />
                 </>
               )}
@@ -127,6 +131,7 @@ function PlayersForm() {
               }
               type="submit"
               className="btn btn-primary btn-sm my-2"
+              data-testid="formButton"
             >
               {multiline ? "Add Players" : "Add Player"}
             </button>
