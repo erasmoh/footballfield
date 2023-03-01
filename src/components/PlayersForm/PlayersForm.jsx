@@ -150,7 +150,7 @@ function PlayersForm() {
             >
               Create teams
             </button>
-            <button onClick={resetPlayers} className="btn btn-warning btn-sm">
+            <button onClick={resetPlayers} className="btn btn-warning btn-sm" data-testid="resetButton">
               Reset
             </button>
           </>

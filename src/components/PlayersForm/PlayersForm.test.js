@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, queryByTestId } from '@testing-library/react';
 
 // Component
 import PlayersForm from './PlayersForm';
@@ -41,7 +41,7 @@ test('should change single new player name', () => {
 test('should change multiple new player name', () => {
     const { getByTestId } = render(<PlayersForm />);
     const multiLineRadio = getByTestId('multiLineRadio')
-    
+
     fireEvent.click(multiLineRadio)
     // Players Textarea is only available after changing the multiline
     const newPlayerTextArea = getByTestId('playersTextArea')
@@ -54,11 +54,28 @@ test('should save single new player after submit', () => {
     const { getByTestId, getByText } = render(<PlayersForm />)
     const newPlayerInput = getByTestId('playerInput')
     const submitButton = getByTestId('submitButton')
-    
+
 
     fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
     fireEvent.click(submitButton)
 
     const newPlayer = getByText("John Doe")
     expect(newPlayer).toBeInTheDocument()
+})
+
+test('should reset list when click on reset button', () => {
+    const { getByTestId, queryByText, queryByTestId } = render(<PlayersForm />)
+    const newPlayerInput = getByTestId('playerInput')
+    const submitButton = getByTestId('submitButton')
+
+
+    fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
+    fireEvent.click(submitButton)
+
+    const resetButton = queryByTestId('resetButton')
+    const newPlayer = queryByText("John Doe")
+    expect(newPlayer).toBeInTheDocument()
+    
+    fireEvent.click(resetButton)
+    expect(newPlayer).not.toBeInTheDocument()
 })
