@@ -20,7 +20,10 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "coverageReporters": ["text", "text-summary"]
+    "coverageReporters": ["text", "text-summary"],
+    "coveragePathIgnorePatterns": [
+      "src/index.js"
+    ]
   },
   "eslintConfig": {
     "extends": [

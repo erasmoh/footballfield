@@ -99,3 +99,33 @@ test('should create teams', () => {
     const newPlayer2 = getAllByText("Mary Poppins")
     expect(newPlayer2.length).toBe(2)
 })
+
+test('should delete player', () => {
+    const { getByTestId, queryByByText, getByText } = render(<PlayersForm />)
+    const newPlayerInput = getByTestId('playerInput')
+    const submitButton = getByTestId('submitButton')
+    
+    
+    fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
+    fireEvent.click(submitButton)
+    
+    // Delete button is only visible after creating players
+    const deleteButton = getByText('Delete')
+    expect(deleteButton).toBeInTheDocument()
+    fireEvent.click(deleteButton)
+    expect(deleteButton).not.toBeInTheDocument()
+})
+
+test('should save multiple new players', () => {
+    const { getByTestId } = render(<PlayersForm />);
+    const multiLineRadio = getByTestId('multiLineRadio')
+    const submitButton = getByTestId('submitButton')
+
+    fireEvent.click(multiLineRadio)
+    // Players Textarea is only available after changing the multiline
+    const newPlayerTextArea = getByTestId('playersTextArea')
+
+    fireEvent.change(newPlayerTextArea, { target: { value: "John Doe\nErasmo\nThird" } })
+    // expect(newPlayerTextArea.value).toBe("John Doe")
+    fireEvent.click(submitButton)
+})
