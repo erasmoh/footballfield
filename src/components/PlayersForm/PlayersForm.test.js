@@ -49,3 +49,16 @@ test('should change multiple new player name', () => {
     fireEvent.change(newPlayerTextArea, { target: { value: "John Doe" } })
     expect(newPlayerTextArea.value).toBe("John Doe")
 })
+
+test('should save single new player after submit', () => {
+    const { getByTestId, getByText } = render(<PlayersForm />)
+    const newPlayerInput = getByTestId('playerInput')
+    const submitButton = getByTestId('submitButton')
+    
+
+    fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
+    fireEvent.click(submitButton)
+
+    const newPlayer = getByText("John Doe")
+    expect(newPlayer).toBeInTheDocument()
+})

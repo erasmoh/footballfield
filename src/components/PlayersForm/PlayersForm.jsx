@@ -132,7 +132,7 @@ function PlayersForm() {
               }
               type="submit"
               className="btn btn-primary btn-sm my-2"
-              data-testid="formButton"
+              data-testid="submitButton"
             >
               {multiline ? "Add Players" : "Add Player"}
             </button>
