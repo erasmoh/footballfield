@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 // Import components
 import FootballField from './components/Home';
 // Import components
