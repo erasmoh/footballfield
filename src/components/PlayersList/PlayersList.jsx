@@ -3,7 +3,7 @@ import React from "react";
 function PlayersList({ players, onDelete }) {
 
     return (
-        <div className="col-12">
+        <div className="col-12" data-testid="playersList">
             <table className="table">
                 <thead>
                     <tr>
@@ -22,6 +22,7 @@ function PlayersList({ players, onDelete }) {
                                     <button
                                         className="btn btn-danger btn-sm"
                                         onClick={(e) => onDelete(index)}
+                                        data-testid="deleteButton"
                                     >
                                         Delete
                                     </button>

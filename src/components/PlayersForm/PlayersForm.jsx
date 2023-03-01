@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PlayersList from "./PlayersList";
-import TeamList from "./TeamList";
+import PlayersList from "../PlayersList/PlayersList";
+import TeamList from "../TeamList/TeamList";
 
 function PlayersForm() {
   const [players, setPlayers] = useState([]);
@@ -59,7 +59,7 @@ function PlayersForm() {
   };
 
   return (
-    <div className="row">
+    <div className="row" data-testid="playersForm">
       <div className="col-6">
         <form onSubmit={handleSubmit}>
           <div className="form-row">

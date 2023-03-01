@@ -19,7 +19,7 @@ function TeamList({ teams }) {
         <React.Fragment>
             {teams.map((team, index) => {
                 return (
-                    <div className={`col-${boxWidth}`} key={index}>
+                    <div className={`col-${boxWidth}`} key={index} data-testid="teamList">
                         <table className="table">
                             <thead>
                                 <tr>
