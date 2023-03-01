@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Footer extends Component {
     render(){
         return (
-            <div className="footer">
+            <div className="footer" data-testid="footer">
                 Made by a Venezuelan football lover with ❤️ from Chile.  
             </div>
         )
