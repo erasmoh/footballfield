@@ -147,6 +147,7 @@ function PlayersForm() {
               disabled={players.length === 0}
               onClick={randomPlayers}
               className="btn btn-primary btn-sm mx-2"
+              data-testid="createButton"
             >
               Create teams
             </button>

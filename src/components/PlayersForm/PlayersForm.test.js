@@ -79,3 +79,23 @@ test('should reset list when click on reset button', () => {
     fireEvent.click(resetButton)
     expect(newPlayer).not.toBeInTheDocument()
 })
+
+test('should create teams', () => {
+    const { getByTestId, getAllByText } = render(<PlayersForm />)
+    const newPlayerInput = getByTestId('playerInput')
+    const submitButton = getByTestId('submitButton')
+    
+    
+    fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
+    fireEvent.click(submitButton)
+    fireEvent.change(newPlayerInput, { target: { value: "Mary Poppins" } })
+    fireEvent.click(submitButton)
+    
+    // Create button is only visible after creating players
+    const createButton = getByTestId('createButton')
+    fireEvent.click(createButton)
+    const newPlayer = getAllByText("John Doe")
+    expect(newPlayer.length).toBe(2)
+    const newPlayer2 = getAllByText("Mary Poppins")
+    expect(newPlayer2.length).toBe(2)
+})
