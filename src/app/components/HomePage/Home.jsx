@@ -1,19 +1,19 @@
 "use client"
 
-import React, { Component } from "react";
-import PlayersForm from "../PlayersForm/PlayersForm";
-import Footer from "../Footer/Footer";
+import { lazy, Suspense } from "react";
 
+const PlayersForm = lazy(() => import("../PlayersForm/PlayersForm"));
+const Footer = lazy(() => import("../Footer/Footer"));
 
-class FootballField extends Component {
-    render() {
-        return (
-            <div className="container" data-testid="footbalfield">
+const HomePage = () => {
+    return (
+        <div className="container" data-testid="footbalfield">
+            <Suspense fallback={<div>Loading...</div>}>
                 <PlayersForm />
                 <Footer />
-            </div>
-        );
-    }
-}
+            </Suspense>
+        </div>
+    );
+};
 
-export default FootballField;
+export default HomePage;

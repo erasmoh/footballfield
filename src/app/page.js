@@ -1,11 +1,12 @@
-import Image from 'next/image'
-import FootballField from './components/HomePage/Home'
+import HomePage from './components/HomePage/Home'
 import './page.scss'
 
-export default function Home() {
+const Page = () => {
   return (
     <div className="App" data-testid="app">
-      <FootballField />
+      <HomePage />
     </div>
   )
 }
+
+export default Page;

@@ -1,6 +1,4 @@
-import React from "react";
-
-function TeamList({ teams }) {
+const TeamList = ({ teams }) => {
     let boxWidth;
     switch (teams.length) {
         case 1:
@@ -16,7 +14,7 @@ function TeamList({ teams }) {
             boxWidth = 3;
     }
     return (
-        <React.Fragment>
+        <>
             {teams.length > 1 && teams.map((team, index) => {
                 return (
                     <div className={`col-${boxWidth}`} key={index} data-testid="teamList">
@@ -41,7 +39,7 @@ function TeamList({ teams }) {
                     </div>
                 );
             })}
-        </React.Fragment>
+        </>
     );
 }
 

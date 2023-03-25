@@ -1,7 +1,4 @@
-import React from "react";
-
-function PlayersList({ players, onDelete }) {
-
+const PlayersList = ({ players, onDelete }) => {
     return (
         <div className="col-12" data-testid="playersList">
             <table className="table">

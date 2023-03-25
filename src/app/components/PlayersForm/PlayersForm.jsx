@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PlayersList from "../PlayersList/PlayersList";
 import TeamList from "../TeamList/TeamList";
 
-function PlayersForm() {
+const PlayersForm = () => {
   const [players, setPlayers] = useState([]);
   const [newPlayer, setNewPlayer] = useState("");
   const [teams, setTeams] = useState([]);
