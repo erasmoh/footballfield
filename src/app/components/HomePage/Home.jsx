@@ -8,7 +8,7 @@ import Footer from "../Footer/Footer";
 class FootballField extends Component {
     render() {
         return (
-            <div className="container">
+            <div className="container" data-testid="footbalfield">
                 <PlayersForm />
                 <Footer />
             </div>
