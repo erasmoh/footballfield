@@ -1,23 +1,9 @@
-const TeamList = ({ teams }) => {
-    let boxWidth;
-    switch (teams.length) {
-        case 1:
-            boxWidth = 12;
-            break;
-        case 2:
-            boxWidth = 6;
-            break;
-        case 3:
-            boxWidth = 4;
-            break;
-        default:
-            boxWidth = 3;
-    }
+const TeamList = ({ teams, specialPlayers }) => {
     return (
         <>
             {teams.length > 1 && teams.map((team, index) => {
                 return (
-                    <div className={`col-${boxWidth}`} key={index} data-testid="teamList">
+                    <div className={`col-6`} key={index} data-testid="teamList">
                         <table className="table">
                             <thead>
                                 <tr>
@@ -28,7 +14,7 @@ const TeamList = ({ teams }) => {
                             <tbody>
                                 {team.map((player, index) => {
                                     return (
-                                        <tr key={index}>
+                                        <tr key={index} className={specialPlayers.includes(player) && 'special'}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{player}</td>
                                         </tr>

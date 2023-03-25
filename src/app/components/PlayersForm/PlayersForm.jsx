@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Components
 import PlayersList from "../PlayersList/PlayersList";
 import TeamList from "../TeamList/TeamList";
@@ -10,6 +10,7 @@ const PlayersForm = () => {
   const [nop, setNop] = useState(1);
   const [multiline, setMultiline] = useState(false);
   const [multilist, setMultilist] = useState("");
+  const [specialPlayers, setSpecialPlayers] = useState([]);
 
   const handleMultilistChange = ({ target }) => {
     const users = target.value;
@@ -37,16 +38,32 @@ const PlayersForm = () => {
   };
   const randomPlayers = (e) => {
     e.preventDefault();
+    const teamA = [];
+    const teamB = [];
     const listOfPlayers = [...players];
-    const virtualTeams = [];
+    const listOfSpecialPlayers = [...specialPlayers];
+    
+    const setOfNames = new Set(specialPlayers);
+    const normalPlayers = listOfPlayers.filter(name => !setOfNames.has(name));
 
-    const randomTeams = [...listOfPlayers].sort(() => Math.random() - 0.5);
-    while (randomTeams.length >= nop) {
-      const newTeam = randomTeams.splice(0, nop);
-      virtualTeams.push(newTeam);
+    const shuffledPlayers = normalPlayers.sort(() => Math.random() - 0.5);
+    const shuffledSpecial = listOfSpecialPlayers.sort(() => Math.random() - 0.5);
+
+    while (shuffledSpecial.length > 0) {
+      const player = listOfSpecialPlayers.pop();
+      const teamToAddPlayer = teamA.length <= teamB.length ? teamA : teamB;
+      teamToAddPlayer.push(player);
     }
-    setTeams((teams) => virtualTeams);
+    // Assign the remaining players to the teams, avoiding the special players' teams
+    while (shuffledPlayers.length > 0) {
+      const player = shuffledPlayers.pop();
+      const teamToAddPlayer = teamA.length <= teamB.length ? teamA : teamB;
+      teamToAddPlayer.push(player);
+    }
+    setTeams([teamA, teamB]);
   };
+
+
   const resetPlayers = (e) => {
     setPlayers([]);
     setTeams([]);
@@ -58,6 +75,20 @@ const PlayersForm = () => {
     temp.splice(player, 1);
     setPlayers(temp);
   };
+
+  const handleToggleSpecial = (player) => {
+    if (specialPlayers.includes(player)) {
+      const newArrayA = specialPlayers.filter(p => p !== player);
+      setSpecialPlayers(newArrayA);
+    } else {
+      setSpecialPlayers([...specialPlayers, player]);
+    }
+  }
+
+  useEffect(() => {
+    console.log('specialPlayers', specialPlayers)
+    console.log('players', players)
+  }, [specialPlayers, players]);
 
   return (
     <div className="row" data-testid="playersForm">
@@ -143,7 +174,12 @@ const PlayersForm = () => {
       <div className="col-6">
         {players.length > 0 ? (
           <>
-            <PlayersList players={players} onDelete={handleDelete} />
+            <PlayersList
+              players={players}
+              onDelete={handleDelete}
+              handleToggleSpecial={handleToggleSpecial}
+              specialPlayers={specialPlayers}
+            />
             <button
               disabled={players.length === 0}
               onClick={randomPlayers}
@@ -160,7 +196,7 @@ const PlayersForm = () => {
           "Add some players"
         )}
       </div>
-      {teams.length > 0 ? <TeamList teams={teams} /> : "No teams yet"}
+      {teams.length > 0 ? <TeamList teams={teams} specialPlayers={specialPlayers} /> : "No teams yet"}
     </div>
   );
 }
