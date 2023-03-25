@@ -1,7 +1,7 @@
 import './App.scss';
+
 // Import components
 import FootballField from './components/Home';
-// Import components
 
 function App() {
   return (
