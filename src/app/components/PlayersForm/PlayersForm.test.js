@@ -1,4 +1,5 @@
-import { render, screen, fireEvent, queryByTestId } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 // Component
 import PlayersForm from './PlayersForm';
@@ -75,7 +76,7 @@ test('should reset list when click on reset button', () => {
     const resetButton = queryByTestId('resetButton')
     const newPlayer = queryByText("John Doe")
     expect(newPlayer).toBeInTheDocument()
-    
+
     fireEvent.click(resetButton)
     expect(newPlayer).not.toBeInTheDocument()
 })
@@ -84,13 +85,13 @@ test('should create teams', () => {
     const { getByTestId, getAllByText } = render(<PlayersForm />)
     const newPlayerInput = getByTestId('playerInput')
     const submitButton = getByTestId('submitButton')
-    
-    
+
+
     fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
     fireEvent.click(submitButton)
     fireEvent.change(newPlayerInput, { target: { value: "Mary Poppins" } })
     fireEvent.click(submitButton)
-    
+
     // Create button is only visible after creating players
     const createButton = getByTestId('createButton')
     fireEvent.click(createButton)
@@ -104,11 +105,11 @@ test('should delete player', () => {
     const { getByTestId, queryByByText, getByText } = render(<PlayersForm />)
     const newPlayerInput = getByTestId('playerInput')
     const submitButton = getByTestId('submitButton')
-    
-    
+
+
     fireEvent.change(newPlayerInput, { target: { value: "John Doe" } })
     fireEvent.click(submitButton)
-    
+
     // Delete button is only visible after creating players
     const deleteButton = getByText('Delete')
     expect(deleteButton).toBeInTheDocument()

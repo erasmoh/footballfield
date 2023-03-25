@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import FootballField from './components/Home'
+import FootballField from './components/HomePage/Home'
 import './page.scss'
 
 export default function Home() {

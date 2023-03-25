@@ -1,8 +1,8 @@
 "use client"
 
 import React, { Component } from "react";
-import PlayersForm from "./PlayersForm/PlayersForm";
-import Footer from "./Footer/Footer";
+import PlayersForm from "../PlayersForm/PlayersForm";
+import Footer from "../Footer/Footer";
 
 
 class FootballField extends Component {
