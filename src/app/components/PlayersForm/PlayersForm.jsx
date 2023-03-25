@@ -85,11 +85,6 @@ const PlayersForm = () => {
     }
   }
 
-  useEffect(() => {
-    console.log('specialPlayers', specialPlayers)
-    console.log('players', players)
-  }, [specialPlayers, players]);
-
   return (
     <div className="row" data-testid="playersForm">
       <div className="col-6">

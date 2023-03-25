@@ -14,7 +14,7 @@ const TeamList = ({ teams, specialPlayers }) => {
                             <tbody>
                                 {team.map((player, index) => {
                                     return (
-                                        <tr key={index} className={specialPlayers.includes(player) && 'special'}>
+                                        <tr key={index} className={specialPlayers.includes(player) ? 'special' : undefined}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{player}</td>
                                         </tr>
