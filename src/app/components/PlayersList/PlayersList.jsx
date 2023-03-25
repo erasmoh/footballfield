@@ -1,4 +1,4 @@
-const PlayersList = ({ players, onDelete, specialPlayers, handleToggleSpecial }) => {
+const PlayersList = ({ players, onDelete, handleToggleSpecial }) => {
     return (
         <div className="col-12" data-testid="playersList">
             <table className="table">

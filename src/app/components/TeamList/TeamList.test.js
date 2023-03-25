@@ -20,15 +20,3 @@ test('Render only one teamList component', () => {
     const element = screen.queryByTestId('teamList');
     expect(element).toBeNull();
 });
-
-// test('Render three teamList components', () => {
-//     render(<TeamList teams={[["first player", "second player"], ["first player", "second player"], ["first player", "second player"]]} />);
-//     const element = screen.getAllByTestId('teamList');
-//     expect(element.length).toBe(3);
-// });
-
-// test('Render more than three teamList components', () => {
-//     render(<TeamList teams={[["first player", "second player"], ["first player", "second player"], ["first player", "second player"], ["first player", "second player"]]} />);
-//     const element = screen.getAllByTestId('teamList');
-//     expect(element.length).toBe(4);
-// });
