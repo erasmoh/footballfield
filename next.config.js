@@ -1,6 +1,8 @@
-module.exports = {
-    publicRuntimeConfig: {
-        // Add your public URL here
-        PUBLIC_URL: process.env.PUBLIC_URL,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    experimental: {
+        appDir: true,
     },
-};
+}
+
+module.exports = nextConfig

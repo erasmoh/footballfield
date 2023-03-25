@@ -1,3 +1,5 @@
+"use client"
+
 import React, { Component } from "react";
 import PlayersForm from "./PlayersForm/PlayersForm";
 import Footer from "./Footer/Footer";
