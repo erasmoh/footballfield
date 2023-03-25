@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom'
 
 // Component
 import FootballField from "./Home";
 
-test('Render footbalfield', () => {
+test('Render footbalfield', async () => {
     render(<FootballField />);
     const element = screen.getByTestId('footbalfield');
-    expect(element).toBeInTheDocument();
+    await waitFor(() => expect(element).toBeInTheDocument());
 });
